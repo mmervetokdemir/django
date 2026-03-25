@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anketler</title>
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Güncel Anketler</h1>
+        
+        {% if latest_question_list %}
+            <ul class="poll-list">
+            {% for question in latest_question_list %}
+                <li class="poll-item">
+                    <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <div class="empty-state">Henüz anket bulunmuyor.</div>
+        {% endif %}
+    </div>
+</body>
+</html>

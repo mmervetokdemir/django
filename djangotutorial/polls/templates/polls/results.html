@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ question.question_text }} - Sonuçlar</title>
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ question.question_text }}</h1>
+
+        <ul class="results-list">
+        {% for choice in question.choice_set.all %}
+            <li class="result-item">
+                <span class="result-text">{{ choice.choice_text }}</span> 
+                <span class="result-votes">{{ choice.votes }} oy</span>
+            </li>
+        {% endfor %}
+        </ul>
+
+        <a href="{% url 'polls:detail' question.id %}" class="btn-submit" style="display: block; text-align: center; text-decoration: none; box-sizing: border-box; margin-bottom: 1rem;">Tekrar Oy Ver?</a>
+        <a href="{% url 'polls:index' %}" class="link-back">Ana Sayfaya Dön</a>
+    </div>
+</body>
+</html>
